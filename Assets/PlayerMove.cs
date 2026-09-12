@@ -1,48 +1,69 @@
-using Unity.VisualScripting;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
     public float speed;
+    public bool IsJumping;
     public float jumppower;
 
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
     Vector2 move;
+    BoxCollider2D boxcollider;
     Animator anime;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxcollider = GetComponent<BoxCollider2D>();
         anime = GetComponent<Animator>();
     }
-    void OnMove(InputValue Value)
+
+    void OnMove(InputValue value)
     {
-        //애니메이션 걷기/스탠딩 변경
-        move = Value.Get<Vector2>();
+        move = value.Get<Vector2>();
         move.x = Mathf.Abs(move.x) <= 0.01f ? 0f : move.x;
 
-        if (move.x != 0){
-        spriteRenderer.flipX = move.x<0;
-        anime.SetBool("IsWalk", true);}
-
-        else{
-        anime.SetBool("IsWalk", false);}
+        if (move.x != 0)
+        {
+            spriteRenderer.flipX = move.x > 0;
+            anime.SetBool("IsWalk", true);
+        }
+        else
+            anime.SetBool("IsWalk",false);
     }
 
     void OnJump(InputValue value)
     {
-        rigid.AddForce(Vector2.up*jumppower, ForceMode2D.Impulse);
-        
+        if (value.isPressed && IsJumping == false)
+        {
+            rigid.AddForce(Vector2.up * jumppower, ForceMode2D.Impulse);
+            IsJumping = true;
+        }
+    }
+
+    //다단점프 방지
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+    foreach (ContactPoint2D contact in collision.contacts){
+        if (contact.normal.y < 0.7f)
+        return;
+    }
+        if(collision.gameObject.CompareTag("Floor")&&rigid.linearVelocityY <= 0)
+            IsJumping = false;
     }
 
     void FixedUpdate()
     {
-        rigid.linearVelocity = new Vector2(move.x*speed, rigid.linearVelocityY);
+        rigid.linearVelocity = new Vector2(move.x * speed, rigid.linearVelocityY);
+    //중력보정
+     if (rigid.linearVelocityY < 0)
+        rigid.gravityScale = 2f; 
+    else
+        rigid.gravityScale = 1f;
 
-        RaycastHit2D rayhit = Physics2D.Raycast(rigid.position,Vector3.down, 1);
     }
 }
