@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,13 +48,13 @@ public class PlayerMove : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
     foreach (ContactPoint2D contact in collision.contacts){
-        if (contact.normal.y < 0.7f)
-        return;
-    }
-        if(collision.gameObject.CompareTag("Floor")&&rigid.linearVelocityY <= 0)
+        if (contact.normal.y >= 0.7f){
+            if(collision.gameObject.CompareTag("Floor")&&rigid.linearVelocityY <= 0)
             IsJumping = false;
+            break;
+        }
     }
-
+}
     void FixedUpdate()
     {
         rigid.linearVelocity = new Vector2(move.x * speed, rigid.linearVelocityY);
