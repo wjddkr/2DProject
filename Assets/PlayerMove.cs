@@ -48,17 +48,23 @@ public class PlayerMove : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
     foreach (ContactPoint2D contact in collision.contacts){
-        if (contact.normal.y >= 0.7f){
-            if(collision.gameObject.CompareTag("Floor")&&rigid.linearVelocityY <= 0)
+        //바닥 인지 확인
+            bool IsFloor = collision.gameObject.CompareTag("Floor");
+
+            if(contact.normal.y >= 0.7f&&IsFloor&&rigid.linearVelocityY <= 0)
             IsJumping = false;
             break;
-        }
     }
 }
+
+
+    
     void FixedUpdate()
     {
+        //이동 값 적용
         rigid.linearVelocity = new Vector2(move.x * speed, rigid.linearVelocityY);
-    //중력보정
+
+        //중력보정
      if (rigid.linearVelocityY < 0)
         rigid.gravityScale = 2f; 
     else
