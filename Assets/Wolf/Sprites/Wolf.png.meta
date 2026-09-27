@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce66e79c087650f4b809e4f6c92ba02c
+      spriteID: 96a54025cf37f3b43922316f9593a09b
       internalID: 99291655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wolf_Idle2
+      name: Wolf_Idel2
       rect:
         serializedVersion: 2
         x: 32
@@ -165,14 +165,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5a40a7f9a1780b44bdae0e0318f5411
-      internalID: -1622654664
+      spriteID: f416b3ed68f5519428edb52eb628a517
+      internalID: -409862531
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wolf_Idle3
+      name: Wolf_Idel3
       rect:
         serializedVersion: 2
         x: 0
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0232d9b572ae2645905e5104aecdf5b
-      internalID: -1080005394
+      spriteID: abb6bd9c9c74aa5479f8ecd31bc51580
+      internalID: 1577010350
       vertices: []
       indices: 
       edges: []
@@ -209,7 +209,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee14390a3166dae47a740cc549d6933d
+      spriteID: 05e604374e7e3b04a9aeb67f8b793d90
       internalID: -816440390
       vertices: []
       indices: 
@@ -231,7 +231,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac53d9872ae747a4eb3bbaf0dcf141d5
+      spriteID: 55c95f0a40d711540bfe693aac066995
       internalID: 884099979
       vertices: []
       indices: 
@@ -253,7 +253,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c064ebac9a9cb44885d1ddf6d315023
+      spriteID: 10087c898d4296549bc8abdddbd92bb7
       internalID: 803338006
       vertices: []
       indices: 
@@ -275,12 +275,12 @@ TextureImporter:
       - key: SpriteEditor.SliceOnImport
         value: False
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":3.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":3.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Wolf_Dash: -816440390
       Wolf_Idel1: 99291655
-      Wolf_Idle2: -1622654664
-      Wolf_Idle3: -1080005394
+      Wolf_Idel2: -409862531
+      Wolf_Idel3: 1577010350
       Wolf_Run1: 884099979
       Wolf_Run2: 803338006
   mipmapLimitGroupName: 
