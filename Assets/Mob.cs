@@ -1,6 +1,7 @@
 using System;
 using Unity.Behavior;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour
@@ -19,7 +20,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         Anime = GetComponent<Animator>();
 
-        InvokeRepeating("attack",1f,3f);
+        InvokeRepeating("attack",1f,1f);
     }
 
     void FixedUpdate()
@@ -33,10 +34,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxsize, 0f);
         foreach(Collider2D hit in collider2Ds)
         {
-            if(hit.gameObject.name == "Wolf")
-            {
-                hit.GetComponent<PlayerMove>().damage(1);
-            }
+                if(hit.gameObject.name == "Wolf")
+                {
+                    if(PlayerMove.Instance.Defensing())
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        PlayerMove.Instance.Stat.Damage(30);
+                    }
+                }
         }
     }
 

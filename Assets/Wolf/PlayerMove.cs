@@ -1,4 +1,5 @@
-    using Unity.VisualScripting.FullSerializer;
+using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
     using UnityEngine;
     using UnityEngine.InputSystem;
 
@@ -6,8 +7,8 @@
     {
         [Header("Ground List")]
         public LayerMask GroundLayer;
-        [Header("HP")]
-        public float hp;
+        [Header("Hp Stats")]
+        public int Hp;
         [Header("Speed Stats")]
         public float speed;
         [Header("Jump Stats")]
@@ -17,7 +18,7 @@
         public float DashSpeedMuliflier;
         public float Cooldown_Dash_Time;
         
-
+        public bool defense = false;
         float RealSpeed;
         float move;
         bool IsGrounded = false;
@@ -30,6 +31,9 @@
         CoolTimer Jump;
         CoolTimer Dash;
 
+        public Stat Stat;
+        public static PlayerMove Instance;
+
         void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
@@ -41,9 +45,14 @@
             Jump = new CoolTimer(Cooldown_Jump_Time);
             Dash = new CoolTimer(Cooldown_Dash_Time);
 
+            //Playe Stat값 가져오기
+            Stat = new Stat(Hp);
+
             //실제 속도값 설정
             RealSpeed = speed;
 
+
+            Instance = this;
         }
 
         //이동
@@ -64,7 +73,7 @@
         //대쉬
         void OnDash(InputValue value)
         {
-        if(!anime.GetBool("IsDefense")){
+        if(!defense){
             if(value.isPressed&&!Dash.Cooldown)
             {
                 anime.SetTrigger("IsDash");
@@ -83,14 +92,25 @@
         {
             if(value.isPressed)
             {
-                anime.SetBool("IsDefense", true);
+                defense = true;
                 RealSpeed = speed/5f;
             }
             else
             {
-                anime.SetBool("IsDefense", false);
+                defense = false;
                 RealSpeed = speed;
             }
+        }
+
+        public bool Defensing()
+        {
+            if(defense)
+            {
+                anime.SetInteger("RanDefense",Random.Range(1,3));
+                anime.SetTrigger("Defensing");
+                defense = false;
+            }
+            return defense;
         }
 
         //점프
@@ -137,9 +157,8 @@
             Dash.Cooltimer();
         }
 
-    public void damage(int damage)
-        {
-            hp -= damage;
-            Debug.Log(hp);
-        }
+    void Update()
+    {
+            anime.SetBool("IsDefense",defense);
     }
+}
