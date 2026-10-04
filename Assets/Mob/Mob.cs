@@ -1,15 +1,20 @@
 using System;
+using System.Collections.Generic;
 using Unity.Behavior;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Build.Profile;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Mob : MonoBehaviour
 {
 
     BehaviorGraphAgent behaviorAgent;
     Rigidbody2D rigid;
     Animator Anime;
+
+    List<Collider2D> hitted = new List<Collider2D>();
 
     [SerializeField] Transform pos;
     [SerializeField] Vector2 boxsize;
@@ -19,8 +24,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         behaviorAgent = GetComponent<BehaviorGraphAgent>();
         rigid = GetComponent<Rigidbody2D>();
         Anime = GetComponent<Animator>();
-
-        InvokeRepeating("attack",1f,1f);
     }
 
     void FixedUpdate()
@@ -28,25 +31,34 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     }
 
-    void attack()
+    public void NormalAttack1()
     {
-        Anime.SetTrigger("Attack");
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxsize, 0f);
         foreach(Collider2D hit in collider2Ds)
         {
-                if(hit.gameObject.name == "Wolf")
+                if(hit.tag == "Player")
                 {
-                    if(PlayerMove.Instance.Defensing())
+
+                    if(PlayerMove.Instance.Defensing() && !hitted.Contains(hit))
                     {
-                        break;
+                        hitted.Add(hit);
                     }
-                    else
+                    else if(!hitted.Contains(hit))
                     {
                         PlayerMove.Instance.Stat.Damage(30);
+                        hitted.Add(hit);
                     }
                 }
         }
     }
+
+    public void EndingAttack()
+    {
+        hitted.Clear();
+    }
+    
+
+    
 
     void OnDrawGizmos()
     {

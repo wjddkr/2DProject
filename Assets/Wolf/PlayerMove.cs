@@ -108,7 +108,6 @@ using Unity.VisualScripting.FullSerializer;
             {
                 anime.SetInteger("RanDefense",Random.Range(1,3));
                 anime.SetTrigger("Defensing");
-                defense = false;
             }
             return defense;
         }
