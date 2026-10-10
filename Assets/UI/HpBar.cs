@@ -7,6 +7,6 @@ public class HpBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.value = (float)PlayerMove.Instance.Stat.Hp/100;
+        slider.value = (float)PlayerStat.Instance.Hp/100f;
     }
 }

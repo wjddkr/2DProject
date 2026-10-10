@@ -1,17 +1,15 @@
 using UnityEngine;
 
-public class Stat
+public abstract class Stat : MonoBehaviour
 {
-    public int Hp;
-    
-    public Stat(int Hp)
-    {
-        this.Hp = Hp;
-    }
+    public abstract int Hp{get; set;}
+    public abstract int MaxChegan{get; set;}
+    public int Chegan;
 
-    public void Damage(int Damage)
+    public void Damage(int Damage, int CheganDamage)
     {
             Hp -= Damage;
-        
+            Chegan += CheganDamage;
+            
     }
 }

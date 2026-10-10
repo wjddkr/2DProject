@@ -45,7 +45,7 @@ public class Mob : MonoBehaviour
                     }
                     else if(!hitted.Contains(hit))
                     {
-                        PlayerMove.Instance.Stat.Damage(30);
+                        PlayerStat.Instance.Damage(30,30);
                         hitted.Add(hit);
                     }
                 }

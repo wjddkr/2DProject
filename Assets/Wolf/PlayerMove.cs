@@ -1,5 +1,4 @@
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
+
     using UnityEngine;
     using UnityEngine.InputSystem;
 
@@ -45,9 +44,6 @@ using Unity.VisualScripting.FullSerializer;
             Jump = new CoolTimer(Cooldown_Jump_Time);
             Dash = new CoolTimer(Cooldown_Dash_Time);
 
-            //Playe Stat값 가져오기
-            Stat = new Stat(Hp);
-
             //실제 속도값 설정
             RealSpeed = speed;
 
@@ -58,9 +54,9 @@ using Unity.VisualScripting.FullSerializer;
         //이동
         void OnMove(InputValue value)
         {
-            Vector2 InputX = value.Get<Vector2>();
-            move = Mathf.Abs(InputX.x) <= 0.01f ? 0f : InputX.x;
-
+            Vector2 Input = value.Get<Vector2>();
+            move = Mathf.Abs(Input.x) <= 0.01f ? 0f : Input.x;
+            Debug.Log(Input);
             if (move != 0)
             {
                 spriteRenderer.flipX = move > 0;
